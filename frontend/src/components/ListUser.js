@@ -41,7 +41,7 @@ export default function ListUser() {
         <div>
             <h2 className="text-center">
                 Users List</h2>
-            <div className="row">
+            <div className="d-flex flex-row">
                 <button className="btn btn-primary"
                     onClick={addUser}> Add User</button>
             </div>

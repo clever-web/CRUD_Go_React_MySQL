@@ -24,7 +24,7 @@ export default function CreateUserList() {
         } else {
             getUser();
         }
-    })
+    }, [])
 
     const saveOrUpdateUser = (e) => {
         e.preventDefault();
@@ -43,20 +43,8 @@ export default function CreateUserList() {
         }
     }
 
-    const changeFirstName = (event) => {
-        setFirstName(event.target.value);
-    }
-
-    const changeLastName = (event) => {
-        setLastName(event.target.value);
-    }
-
-    const changeEmail = (event) => {
-        setEmail(event.target.value);
-    }
-
     const cancel = () => {
-        navigate('/users')
+        navigate('/')
     }
 
     const getTitle = () => {
@@ -83,21 +71,21 @@ export default function CreateUserList() {
                                     <input placeholder="First Name"
                                         name="firstName" className="form-control"
                                         value={firstName}
-                                        onChange={changeFirstName} />
+                                        onChange={(e) => setFirstName(e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label> Last Name: </label>
                                     <input placeholder="Last Name"
                                         name="lastName" className="form-control"
                                         value={lastName}
-                                        onChange={changeLastName} />
+                                        onChange={(e) => setLastName(e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label> Email : </label>
                                     <input placeholder="Email Address"
                                         name="email" className="form-control"
                                         value={email}
-                                        onChange={changeEmail} />
+                                        onChange={(e) => setEmail(e.target.value)} />
                                 </div>
 
                                 <button className="btn btn-success"
