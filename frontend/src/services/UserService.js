@@ -15,7 +15,6 @@ function getUserById(userId) {
 }
 
 function updateUser(user, userId) {
-    console.log(222)
     return axios.put(USER_API_BASE_URL + '/' + userId, user)
 }
 

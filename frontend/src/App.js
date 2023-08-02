@@ -7,11 +7,13 @@ import Footer from './components/Footer';
 import ListUser from './components/ListUser';
 import ViewUser from './components/ViewUser';
 import CreateUserList from './components/CreateUser';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
   return (
     <div>
+      <ToastContainer />
       <Header />
       <Router>
         

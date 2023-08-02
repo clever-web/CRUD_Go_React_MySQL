@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getUserById, createUser, updateUser } from '../services/UserService';
+import { validateEmail } from '../utils/validateForm';
 
 export default function CreateUserList() {
 
@@ -26,20 +28,47 @@ export default function CreateUserList() {
         }
     }, [])
 
+    const validateFormData = () => {
+        if (firstName && lastName && email && validateEmail(email)) {
+            return true;
+        } else {
+            if(!firstName)
+                toast.error("First Name is required!")
+            if(!lastName)
+                toast.error("Last Name is required!")
+            if(!email) 
+                toast.error("Email is required!")
+            if(!validateEmail(email))
+                toast.error("Email Format is not correct")
+            return false;
+        }
+    }
+
     const saveOrUpdateUser = (e) => {
         e.preventDefault();
         const user = { firstName: firstName, lastName: lastName, email: email };
         console.log("user =>" + JSON.stringify(user));
 
         if (id === "_add") {
-            createUser(user).then(res => {
-                navigate('/');
-            });
+            if (validateFormData()) {
+                createUser(user).then(res => {
+                    toast.success(res.data)
+                    navigate('/');
+                });
+            } else {
+                navigate('/add-user/_add');
+            }
+            
         } else {
-            console.log(111)
-            updateUser(user, id).then(res => {
-                navigate('/');
-            })
+            if (validateFormData()) {
+                updateUser(user, id).then(res => {
+                    toast.success(res.data)
+                    navigate('/');
+                })
+            } else {
+                navigate(`/add-user/${id}`);
+            }
+            
         }
     }
 
